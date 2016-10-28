@@ -9,10 +9,14 @@ import java.util.List;
 
 import org.junit.Test;
 
+import dirv.chat.server.MessageRepository;
 import dirv.chat.server.commands.Command;
 import dirv.chat.server.commands.RegisterUserCommand;
 
 public class RegisterUserCommandTest extends CommandTest {
+	
+//	private MessageRepository messageRepository;
+
 
     private final List<String> users = new ArrayList<String>();
 
@@ -24,21 +28,21 @@ public class RegisterUserCommandTest extends CommandTest {
     @Test
     public void acknowledgesAdd() throws IOException {
         String output = executeCommand("Donald\n");
-        assertEquals("OK\n", output.toString());
+        assertEquals("OK\r\n", output.toString());
     }
     
     @Test
     public void doesNotAddIfNoNameGiven() throws IOException {
         String output = executeCommand("");
         assertEquals(0, users.size());
-        assertEquals("ERROR\n", output.toString());
+        assertEquals("ERROR\r\n", output.toString());
     }
     
     @Test
     public void doesNotAddIfNameIsBlank() throws IOException {
         String output = executeCommand("\n");
         assertEquals(0, users.size());
-        assertEquals("ERROR\n", output.toString());
+        assertEquals("ERROR\r\n", output.toString());
     }
     
     @Test
@@ -46,7 +50,7 @@ public class RegisterUserCommandTest extends CommandTest {
         executeCommand("Donald\n");
         String output = executeCommand("Donald\n");
         assertEquals(1, users.size());
-        assertEquals("ERROR\n", output.toString());
+        assertEquals("ERROR\r\n", output.toString());
     }
     
     @Test

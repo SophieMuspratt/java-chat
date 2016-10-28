@@ -28,6 +28,12 @@ public class ServerListener implements Runnable {
     
     private void handleMessage(Message message) {
         updateTimestamp(message);
+        Hangman hangman = new Hangman(messageSender);
+        if (message.getMessage().equals("hangman")){
+        		hangman.startMessage();
+        } else if (message.getMessage().length() == 1){
+        		hangman.guessCharacter(message);
+        }
         display.message(message);
     }
     
